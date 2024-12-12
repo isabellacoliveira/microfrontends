@@ -11,7 +11,7 @@ sharedMappings.register(
 module.exports = {
   output: {
     uniqueName: "mfeApp",
-    publicPath: "auto", 
+    publicPath: "auto",
     scriptType: 'text/javascript'
   },
   optimization: {
@@ -27,29 +27,29 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-        library: { type: "module" },
+      library: { type: "module" },
 
-        // For remotes (please adjust)
-        name: "mfeApp",
-        filename: "remoteEntry.js",
-        exposes: {
-            './ProfileModule': './projects/mfe-app/src/app/profile/profile.module.ts',
-        },
+      // For remotes (please adjust)
+      name: "mfeApp",
+      filename: "remoteEntry.js",
+      exposes: {
+        './ProfileModule': './projects/mfe-app/src/app/profile/profile.module.ts',
+      },
 
-        // For hosts (please adjust)
-        // remotes: {
-        //     "hostApp": "http://localhost:4200/remoteEntry.js",
+      // For hosts (please adjust)
+      // remotes: {
+      //     "hostApp": "http://localhost:4200/remoteEntry.js",
 
-        // },
+      // },
 
-        shared: share({
-          "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-          "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-          "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-          "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+      shared: share({
+        "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
 
-          ...sharedMappings.getDescriptors()
-        })
+        ...sharedMappings.getDescriptors()
+      })
 
     }),
     sharedMappings.getPlugin()
